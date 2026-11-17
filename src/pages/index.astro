@@ -1,0 +1,192 @@
+---
+import '@fontsource/bricolage-grotesque/600.css';
+import '@fontsource/bricolage-grotesque/800.css';
+import '@fontsource/instrument-sans/400.css';
+import '@fontsource/instrument-sans/500.css';
+import '@fontsource/instrument-sans/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+
+const title = 'Adii';
+const description = 'Adii: backend engineer building systems that run on cruise ships, and AI agents for clients. .NET Core, Java, React Native, Azure and AWS.';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b1824" />
+    <meta property="og:title" content="Adii · Backend and AI engineer" />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div id="intro" aria-hidden="true">
+      <div class="lid top"></div>
+      <div class="lid bot"><div class="meta">Local time <span id="itime">--:--</span> · somewhere at sea</div><div class="skip">click to enter</div></div>
+      <div class="hz"></div><div class="ping"></div><div class="ping p2"></div>
+      <div class="act" id="act" hidden>
+        <div id="term"></div>
+        <div class="pbar"><i></i></div>
+        <div id="crit"><b>SYSTEM DOWN</b><small>srv-01 · mid-ocean · no internet · one engineer on call</small></div>
+        <div id="grow"><small>Ship stays afloat</small><b>Let's grow<br>together<em>.</em></b></div>
+      </div>
+      <div class="shint" id="shint"><i></i>Tap anywhere to turn on sound</div>
+      <button class="skipb" id="skipb" type="button">Skip intro</button>
+    </div>
+    
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="vignette"></div>
+    <div class="ring" id="ring"></div>
+    <div class="label" id="label"></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <a class="wafab" href="https://wa.me/917030995694?text=Hi%20Adii%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener" aria-label="Chat with Adii on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" width="28" height="28"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.4c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.1.7l-.5.6c-.1.2-.1.4 0 .6.5.9 1.2 1.6 2.1 2.1.2.1.4.1.6 0l.6-.5c.2-.2.5-.2.7-.1l1.7.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.4.8-.6.4-1.5.6-2.3.4-2.6-.7-4.6-2.7-5.3-5.3-.2-.8 0-1.7.4-2.3z" fill="currentColor"/></svg><span>Chat on WhatsApp</span></a>
+    <div class="bubble" id="bubble" role="status" aria-live="polite" hidden><b id="btitle">Hey! I'm Adii.</b><span id="btxt"></span><span class="bacts" id="bgo" hidden><a class="btn hot" href="#contact">Let's connect</a><a class="btn wa" href="https://wa.me/917030995694?text=Hi%20Adii%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.4c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.1.7l-.5.6c-.1.2-.1.4 0 .6.5.9 1.2 1.6 2.1 2.1.2.1.4.1.6 0l.6-.5c.2-.2.5-.2.7-.1l1.7.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.4.8-.6.4-1.5.6-2.3.4-2.6-.7-4.6-2.7-5.3-5.3-.2-.8 0-1.7.4-2.3z" fill="currentColor"/></svg>WhatsApp</a></span></div>
+    <aside class="pop" id="pop" role="dialog" aria-labelledby="popt" hidden>
+      <button class="x" id="popx" type="button" aria-label="Close">×</button>
+      <div class="log"><span>Incoming signal</span><span>● live</span></div>
+      <h3 id="popt">Let's build something new.</h3>
+      <p>Got an idea, a system that keeps breaking, or a product that needs to ship? I have room for new freelance projects and I'm open to full-time roles.</p>
+      <div class="ctas"><a class="btn hot" id="popgo" href="#contact">Let's connect</a><a class="btn wa" href="https://wa.me/917030995694?text=Hi%20Adii%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.4c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.1.7l-.5.6c-.1.2-.1.4 0 .6.5.9 1.2 1.6 2.1 2.1.2.1.4.1.6 0l.6-.5c.2-.2.5-.2.7-.1l1.7.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.4.8-.6.4-1.5.6-2.3.4-2.6-.7-4.6-2.7-5.3-5.3-.2-.8 0-1.7.4-2.3z" fill="currentColor"/></svg>WhatsApp</a><button class="btn" id="popcopy" type="button">Copy email</button></div>
+    </aside>
+    
+    <nav>
+      <div class="logo">adii<b>.</b></div>
+      <div class="navr">
+        <div class="clock" aria-label="Current time in India"><i></i><span>IST</span><b id="istt">--:--:--</b></div>
+        <button class="btn snd" id="snd" type="button" aria-pressed="false">Sound off</button>
+        <button class="btn" id="flat" aria-pressed="false">Skip 3D</button>
+        <a class="btn hot" href="#contact">Hire me</a>
+      </div>
+    </nav>
+    
+    <div class="found" id="found" aria-live="polite"><span>Explored <b id="fcount">0</b>/9</span><span class="ticks" id="ticks"></span></div>
+    
+    <div class="dots" id="dots">
+      <a href="#home"><span>home</span><i></i></a>
+      <a href="#work"><span>work</span><i></i></a>
+      <a href="#ai"><span>ai</span><i></i></a>
+      <a href="#backend"><span>backend</span><i></i></a>
+      <a href="#mobile"><span>mobile</span><i></i></a>
+      <a href="#experience"><span>experience</span><i></i></a>
+      <a href="#contact"><span>contact</span><i></i></a>
+    </div>
+    
+    <main>
+      <section class="step hero" id="home">
+        <div class="hero-in">
+          <p class="tagline">Taking freelance projects · open to backend and AI roles</p>
+          <h1 class="big" aria-label="Adii"><span class="ln" data-t="Adii."></span></h1>
+          <p class="sub">I write the backend code that runs <b>on cruise ships in the middle of the ocean</b>, and I build <b>AI agents</b> for clients on land. 3 years in production with .NET Core and Java.</p>
+          <div class="ctas"><a class="btn hot" href="#contact">Start a project</a><a class="btn" href="#work">See my work</a></div>
+          <div class="hstats">
+            <div><b>3+</b><small>years in production</small></div>
+            <div><b>10+</b><small>freelance clients delivered</small></div>
+            <div><b>5</b><small>active clients</small></div>
+            <div><b>27+</b><small>REST endpoints shipped</small></div>
+          </div>
+          <div class="quest">9 things in this cabin react when you click them. Find them all.</div>
+        </div>
+      </section>
+    
+      <section class="step" id="work">
+        <article class="card">
+          <div class="log"><span>Log 01 · the monitor</span><span class="st" data-k="monitor">not explored</span></div>
+          <h2>Systems running at sea</h2>
+          <p>I own the backend for two production maritime platforms deployed on premises aboard cruise ships.</p>
+          <div class="stats">
+            <div class="stat"><b>2–3k</b><small>records per sailing</small></div>
+            <div class="stat"><b>3</b><small>client systems integrated</small></div>
+            <div class="stat"><b>15+</b><small>REST endpoints</small></div>
+          </div>
+          <div class="proj">
+            <h3>Cruise Passenger Data Sharing <span>compliance</span></h3>
+            <p>Reports passenger and crew data to government authorities on entry to and exit from international waters. An Adapter layer turns three incompatible client XML formats into one model, so new clients onboard without touching the rule engine.</p>
+            <div class="flow">SOAP/XML → adapters → validation → rule engine → MySQL</div>
+          </div>
+          <div class="proj">
+            <h3>Cruise Room and Service Tracking <span>operations</span></h3>
+            <p>Tracks room assignments and daily service activity across full voyages, with role-based access for stewards and managers.</p>
+            <div class="tags"><span class="tag">.NET Core</span><span class="tag">ASP.NET Core</span><span class="tag">MySQL</span><span class="tag">SOAP</span></div>
+          </div>
+        </article>
+      </section>
+    
+      <section class="step" id="ai">
+        <article class="card">
+          <div class="log"><span>Log 02 · the AI core</span><span class="st" data-k="holo">not explored</span></div>
+          <h2>AI agents and LLM tools</h2>
+          <p>I build AI into real products: agents that call tools and APIs, and LLM features wired into existing .NET backends.</p>
+          <div class="proj">
+            <h3>AI PR Review <span>LLM platform</span></h3>
+            <p>Reads GitHub pull-request diffs and has an LLM write the review. Each review is versioned per commit SHA, so teams can see how feedback changes with the code.</p>
+            <div class="flow">GitHub → ASP.NET Core → LLM → MySQL → Angular</div>
+          </div>
+          <div class="proj">
+            <h3>AI agents for clients <span>freelance</span></h3>
+            <p>Agents that read business data, take actions through APIs and hand results back to people.</p>
+            <div class="tags"><span class="tag">AI agents</span><span class="tag">LLM APIs</span><span class="tag">Tool calling</span><span class="tag">Prompt design</span></div>
+          </div>
+        </article>
+      </section>
+    
+      <section class="step" id="backend">
+        <article class="card">
+          <div class="log"><span>Log 03 · the server rack</span><span class="st" data-k="rack">not explored</span></div>
+          <h2>Backend that holds up at sea</h2>
+          <p>No reliable internet, constrained hardware, government compliance rules. It still has to work.</p>
+          <div class="proj"><h3>Integration</h3><p>SOAP web services, XML parsing and transformation, third-party systems, structured error handling.</p></div>
+          <div class="proj"><h3>Security</h3><p>JWT authentication and role-based access for stewards, ship managers and administrators.</p></div>
+          <div class="proj"><h3>Performance</h3><p>MySQL indexing, query tuning and normalisation that keep reports fast on shipboard hardware.</p></div>
+          <div class="proj"><h3>Delivery</h3><p>GitHub Actions CI/CD to Azure, APIs documented in Swagger and tested in Postman.</p></div>
+        </article>
+      </section>
+    
+      <section class="step" id="mobile">
+        <article class="card">
+          <div class="log"><span>Log 04 · the phone</span><span class="st" data-k="phone">not explored</span></div>
+          <h2>Dairy Billing Platform</h2>
+          <p>A product I built and shipped on my own. Milk delivery businesses use it every day.</p>
+          <div class="stats">
+            <div class="stat"><b>2</b><small>businesses using it</small></div>
+            <div class="stat"><b>12</b><small>API endpoints</small></div>
+            <div class="stat"><b>4</b><small>bills per A4 sheet</small></div>
+          </div>
+          <div class="proj"><p>Carry-forward billing adds last month's balance to this month's charges and marks each bill paid, part-paid or unpaid. One endpoint loads a full year, and filters run instantly on the phone.</p></div>
+          <div class="tags"><span class="tag">React Native</span><span class="tag">ASP.NET Core 8</span><span class="tag">EF Core</span><span class="tag">MySQL</span><span class="tag">Azure</span><span class="tag">JWT</span></div>
+        </article>
+      </section>
+    
+      <section class="step" id="experience">
+        <article class="card">
+          <div class="log"><span>Log 05 · the bookshelf</span><span class="st" data-k="shelf">not explored</span></div>
+          <h2>Where I've worked</h2>
+          <div class="proj"><h3>Freelance engineer <span>independent</span></h3><p>10+ client projects delivered and 5 clients active today: backend APIs, mobile apps, cloud deployment and AI agents.</p></div>
+          <div class="proj"><h3>SKO Systems India <span>Nov 2024 – now</span></h3><p>.NET Developer. Backend for two production maritime platforms: API design, SOAP integration, MySQL performance, live support.</p></div>
+          <div class="proj"><h3>Bit Hub Technology <span>Nov 2023 – Nov 2024</span></h3><p>Java Backend Developer. Spring Boot and Hibernate services for core banking workflows.</p></div>
+          <div class="proj"><h3>B.E. Mechanical <span>2018 – 2022</span></h3><p>Savitribai Phule Pune University, 7.8 CGPA.</p></div>
+        </article>
+      </section>
+    
+      <section class="step" id="contact">
+        <article class="card">
+          <div class="log"><span>Log 06 · signal received</span><span class="st" id="contactst">0/9 explored</span></div>
+          <h2>Have a project? Let's build it.</h2>
+          <p>I'm taking freelance work in backend APIs, AI agents and mobile apps, and I'm open to full-time backend and AI roles. I reply within a day.</p>
+          <div class="mail"><code id="addr">adeshmutadak@gmail.com</code><button class="btn" id="copy">Copy</button></div>
+          <div class="mail" style="margin-top:10px"><span class="phone">+91 70309 95694</span><a class="btn wa" href="https://wa.me/917030995694?text=Hi%20Adii%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.4c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.1.7l-.5.6c-.1.2-.1.4 0 .6.5.9 1.2 1.6 2.1 2.1.2.1.4.1.6 0l.6-.5c.2-.2.5-.2.7-.1l1.7.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.4.8-.6.4-1.5.6-2.3.4-2.6-.7-4.6-2.7-5.3-5.3-.2-.8 0-1.7.4-2.3z" fill="currentColor"/></svg>WhatsApp me</a></div>
+          <div class="ctas" style="margin-top:14px"><a class="btn hot" href="https://www.linkedin.com/in/adeshmutadak/" target="_blank" rel="noopener">LinkedIn</a><a class="btn" href="https://github.com/adeshmutadak" target="_blank" rel="noopener">GitHub</a></div>
+        </article>
+      </section>
+    </main>
+    <footer>© 2026 Adii · built with Three.js, somewhere between port and open sea</footer>
+    <script>
+      import '../scripts/main.js';
+    </script>
+  </body>
+</html>
